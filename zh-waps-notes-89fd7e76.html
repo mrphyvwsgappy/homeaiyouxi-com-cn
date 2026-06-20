@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>九游 · 信息卡片介绍</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background: #f7f3ed;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      color: #2b2b2b;
+      line-height: 1.7;
+      padding: 2rem 1.2rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .container {
+      max-width: 960px;
+      width: 100%;
+      background: #fdfcf9;
+      border-radius: 32px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.03), 0 4px 8px rgba(0, 0, 0, 0.02);
+      padding: 2rem 1.8rem;
+      margin: 2rem 0;
+    }
+    @media (min-width: 640px) {
+      .container { padding: 3rem 3.2rem; }
+      body { padding: 3rem 2rem; }
+    }
+
+    /* 主视觉 */
+    .hero {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+    .hero h1 {
+      font-size: 2.4rem;
+      font-weight: 450;
+      letter-spacing: -0.02em;
+      color: #1f1e1c;
+      margin-bottom: 0.6rem;
+    }
+    .hero .sub {
+      font-size: 1.1rem;
+      color: #5f5b55;
+      border-top: 1px solid #e3dbd0;
+      border-bottom: 1px solid #e3dbd0;
+      display: inline-block;
+      padding: 0.4rem 1.2rem;
+      margin-top: 0.2rem;
+    }
+    .hero .sub span {
+      display: inline-block;
+      background: #eae4da;
+      padding: 0.1rem 0.6rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      color: #3a352e;
+      margin-left: 0.3rem;
+    }
+
+    /* 信息卡片网格 */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin: 2.2rem 0;
+    }
+    .card {
+      background: white;
+      border-radius: 20px;
+      padding: 1.6rem 1.4rem 1.8rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02), 0 1px 3px rgba(0, 0, 0, 0.02);
+      border: 1px solid #ece6dd;
+      transition: transform 0.15s ease;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      border-color: #d6cdbf;
+    }
+    .card h3 {
+      font-size: 1.3rem;
+      font-weight: 480;
+      margin-bottom: 0.7rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: #2d2822;
+    }
+    .card h3 i {
+      display: inline-block;
+      width: 28px;
+      height: 28px;
+      background: #ece4d8;
+      border-radius: 30%;
+      line-height: 28px;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #4f463c;
+      margin-right: 0.2rem;
+    }
+    .card p {
+      color: #3d3934;
+      font-size: 0.98rem;
+    }
+    .card .tag {
+      display: inline-block;
+      background: #f0e9e0;
+      border-radius: 16px;
+      padding: 0.15rem 0.9rem;
+      font-size: 0.8rem;
+      color: #3b332b;
+      margin-top: 0.8rem;
+    }
+
+    /* 引用块 / 提示框 */
+    .inset-block {
+      background: #f4eee6;
+      border-left: 6px solid #b7a68e;
+      padding: 1.4rem 1.6rem;
+      border-radius: 12px;
+      margin: 2rem 0 1.8rem;
+      font-size: 0.98rem;
+    }
+    .inset-block strong {
+      color: #29231d;
+    }
+    .inset-block .inset-source {
+      display: block;
+      margin-top: 0.6rem;
+      font-size: 0.88rem;
+      color: #5b5248;
+    }
+
+    .faq-summary {
+      margin: 2.2rem 0 1.2rem;
+    }
+    .faq-item {
+      padding: 0.9rem 0;
+      border-bottom: 1px solid #e6ddd2;
+    }
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+    .faq-q {
+      font-weight: 480;
+      font-size: 1.02rem;
+      display: flex;
+      align-items: baseline;
+      gap: 0.4rem;
+      color: #2e2923;
+    }
+    .faq-q::before {
+      content: "▹";
+      color: #907e6a;
+      font-size: 1.1rem;
+    }
+    .faq-a {
+      color: #48423b;
+      margin-top: 0.3rem;
+      padding-left: 1.6rem;
+      font-size: 0.96rem;
+    }
+
+    .link-sentence {
+      background: #f9f6f0;
+      padding: 1.2rem 1.6rem;
+      border-radius: 24px;
+      margin: 2rem 0 0.5rem;
+      font-size: 1.05rem;
+      border: 1px solid #e1d7ca;
+      text-align: center;
+    }
+    .link-sentence a {
+      color: #2b5a4b;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-thickness: 1px;
+      text-decoration-color: #b5aa99;
+      font-weight: 480;
+    }
+    .link-sentence a:hover {
+      color: #0f3d31;
+      text-decoration-color: #2b5a4b;
+    }
+
+    .footer-note {
+      margin-top: 2.5rem;
+      border-top: 1px solid #e3dbd0;
+      padding-top: 1.8rem;
+      font-size: 0.88rem;
+      color: #6b6257;
+      text-align: center;
+    }
+
+    hr {
+      border: none;
+      height: 1px;
+      background: #e3dbd0;
+      margin: 1.2rem 0;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- 主视觉 -->
+  <div class="hero">
+    <h1>九游 · 不止是聚合</h1>
+    <div class="sub">生活向 · 信息卡片 <span>轻量感知</span></div>
+  </div>
+
+  <!-- 介绍段落，自然嵌入链接 -->
+  <p style="font-size:1.02rem; margin-bottom: 0.2rem;">
+    日常中遇到碎片化的主题、想要快速获得不同角度的梳理——<a href="https://zh-waps-jiuyou.com">九游</a>倾向于用更轻量的方式组织信息，没有复杂层级，也不靠堆砌关键词来吸引注意。卡片式的索引让浏览者能一眼看到核心，再决定往哪个方向深入。
+  </p>
+
+  <!-- 信息卡片：用途 + 人群 -->
+  <div class="card-grid">
+    <div class="card">
+      <h3><i>📋</i> 用途卡片</h3>
+      <p>适合快速了解某个话题下的分支内容，比如生活技巧、工具推荐、轻知识梳理。每张卡片独立成块，可以单独理解，也适合组合阅读。</p>
+      <span class="tag">场景：信息筛选</span>
+    </div>
+    <div class="card">
+      <h3><i>👥</i> 适合人群</h3>
+      <p>日常需要浏览多个信息源、但不想陷入信息瀑布的用户；喜欢结构化摘要而非长文堆叠的读者；偶尔想换个节奏了解内容的普通上网者。</p>
+      <span class="tag">偏好：清晰·克制</span>
+    </div>
+    <div class="card">
+      <h3><i>🔄</i> 内容节奏</h3>
+      <p>不追求每篇都铺满细节，而是提供可延展的骨架。你可以把卡片当作索引，也可以当作轻笔记，节省重新组织语言的时间。</p>
+      <span class="tag">特点：可读可跳</span>
+    </div>
+  </div>
+
+  <!-- 引用块 / 提示框（带生活语气） -->
+  <div class="inset-block">
+    <strong>一点观察</strong> —— 很多主题其实不需要长篇大论才能讲清楚。用卡片把几个关键点拎出来，反而更容易记住。就像做饭时备菜，先把食材切好摆盘，后面怎么组合都方便。
+    <span class="inset-source">—— 来自日常内容阅读习惯</span>
+  </div>
+
+  <!-- 自然链接段落（第二个 a 标签，融入句中） -->
+  <div class="link-sentence">
+    💡 如果你正在寻找一个信息组织更清爽的站点，不妨试试 <a href="https://zh-waps-jiuyou.com">九游</a>，它的卡片索引方式或许能带来不一样的浏览感受。
+  </div>
+
+  <!-- FAQ 摘要  -->
+  <div class="faq-summary">
+    <div class="faq-item">
+      <div class="faq-q">卡片里的内容会经常更新吗？</div>
+      <div class="faq-a">根据主题热度与内容积累周期更新，不固定频率，但会保持卡片之间的逻辑连贯。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">适合在手机上阅读吗？</div>
+      <div class="faq-a">卡片布局对移动端友好，单栏展示，字号和间距已做适配，横屏竖屏都能自然浏览。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">是否只有单一类型的内容？</div>
+      <div class="faq-a">目前以信息卡片为主，后续可能会加入简短列表与参考索引，但会保持克制的排版风格。</div>
+    </div>
+  </div>
+
+  <!-- 收尾段落 / 再次嵌入链接（第三个 a 标签，不同句式） -->
+  <p style="margin: 1.4rem 0 0.4rem; font-size: 0.98rem;">
+    整体来说，<a href="https://zh-waps-jiuyou.com">九游</a>更愿意做一块平整的“桌面”，而不是热闹的公告板。你可以把卡片当作便签，也可以当作索引——怎么用完全取决于当天的需求。
+  </p>
+
+  <hr>
+
+  <div class="footer-note">
+    信息卡片式索引 · 米白背景 · 文章排版<br>
+    <span style="display: inline-block; margin-top: 6px; opacity: 0.6;">&copy; 内容方向参考</span>
+  </div>
+
+</div>
+</body>
+</html>

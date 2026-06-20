@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>wd188 · 简单的开始</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background: #f2f4f6;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      line-height: 1.6;
+      color: #2c3e4f;
+      padding: 2rem 1.2rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .page {
+      max-width: 920px;
+      width: 100%;
+    }
+
+    /* 卡片通用样式 */
+    .card {
+      background: #ffffff;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03), 0 1px 3px rgba(0, 0, 0, 0.05);
+      border: 1px solid #e6eaed;
+      padding: 2rem 2rem 2.2rem;
+      margin-bottom: 2rem;
+      transition: box-shadow 0.2s ease;
+    }
+    .card:hover {
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04), 0 2px 6px rgba(0, 0, 0, 0.06);
+    }
+
+    /* hero 区域 */
+    .hero {
+      text-align: left;
+      padding-top: 2.4rem;
+      padding-bottom: 2rem;
+    }
+    .hero-title {
+      font-size: 2.8rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: #1a2a38;
+      margin-bottom: 0.6rem;
+      line-height: 1.2;
+    }
+    .hero .tag {
+      display: inline-block;
+      background: #e5e9ee;
+      color: #2c3e4f;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 0.2rem 1rem;
+      border-radius: 30px;
+      margin-bottom: 1.2rem;
+    }
+    .hero p {
+      font-size: 1.1rem;
+      color: #3d5164;
+      max-width: 80%;
+      margin-top: 0.25rem;
+    }
+
+    /* 承接段落 */
+    .intro-text {
+      font-size: 1.05rem;
+      color: #2f4052;
+      margin-bottom: 0.6rem;
+    }
+    .intro-text a {
+      color: #1a5f7a;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px solid #cbd5dd;
+      transition: border-color 0.2s;
+    }
+    .intro-text a:hover {
+      border-color: #1a5f7a;
+    }
+
+    /* 特点列表 */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin: 1.8rem 0 0.8rem;
+    }
+    .feature-item {
+      background: #f9fafb;
+      border-radius: 16px;
+      padding: 1.2rem 1.4rem;
+      border: 1px solid #e6eaed;
+      transition: background 0.15s;
+    }
+    .feature-item:hover {
+      background: #f2f5f8;
+    }
+    .feature-item .icon {
+      font-size: 1.4rem;
+      margin-bottom: 0.2rem;
+      display: inline-block;
+    }
+    .feature-item h3 {
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin: 0.3rem 0 0.2rem;
+      color: #1a2a38;
+    }
+    .feature-item p {
+      font-size: 0.95rem;
+      color: #4a5f72;
+      margin-top: 0.25rem;
+    }
+
+    /* 场景提醒 */
+    .note-section {
+      background: #f9fafb;
+      border-left: 4px solid #b3c2d0;
+      padding: 1.5rem 1.8rem;
+      border-radius: 0 16px 16px 0;
+      margin: 1.5rem 0 1rem;
+    }
+    .note-section p {
+      font-size: 1rem;
+      color: #35505f;
+      margin-bottom: 0.3rem;
+    }
+
+    /* FAQ 摘要 */
+    .faq-mini {
+      border-top: 1px solid #e3e8ed;
+      padding-top: 1.6rem;
+      margin-top: 1.2rem;
+    }
+    .faq-mini summary {
+      font-weight: 500;
+      color: #1f3747;
+      cursor: pointer;
+      padding: 0.3rem 0;
+      font-size: 1rem;
+    }
+    .faq-mini details {
+      margin-bottom: 0.8rem;
+    }
+    .faq-mini details p {
+      margin: 0.4rem 0 0.2rem 1.2rem;
+      color: #3d5568;
+      font-size: 0.95rem;
+    }
+
+    /* 结尾 */
+    .gentle-footer {
+      margin-top: 2rem;
+      padding: 1.2rem 0;
+      text-align: center;
+      font-size: 0.95rem;
+      color: #5b6f80;
+      border-top: 1px solid #e3e8ed;
+    }
+    .gentle-footer a {
+      color: #1f4b61;
+      text-decoration: none;
+      border-bottom: 1px solid #c2d1dc;
+    }
+    .gentle-footer a:hover {
+      border-bottom-color: #1f4b61;
+    }
+
+    /* 响应式 */
+    @media (max-width: 680px) {
+      body {
+        padding: 1.2rem 0.8rem;
+      }
+      .card {
+        padding: 1.5rem 1.2rem;
+      }
+      .hero-title {
+        font-size: 2rem;
+      }
+      .hero p {
+        max-width: 100%;
+      }
+      .feature-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+      .note-section {
+        padding: 1.2rem 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- hero 开场短句 -->
+    <div class="card hero">
+      <div class="tag">稳定 · 克制 · 简单</div>
+      <h1 class="hero-title">wd188<br>一个安静的入口</h1>
+      <p>有时候，你需要的只是一个能稳定打开的地方。没有复杂的选择，没有冗余的信息，只有一条清晰的路。</p>
+    </div>
+
+    <!-- 承接段落 + 介绍 -->
+    <div class="card">
+      <p class="intro-text">
+        很多人第一次接触 <a href="https://home-wd188.com">wd188</a> 的时候，以为它只是一个普通页面。用过几次之后会发现，它的价值恰恰藏在那种“不需要多想”的体验里——无论什么时候打开，它都在那里，页面结构稳定，加载干净。
+      </p>
+      <p class="intro-text" style="margin-top: 0.8rem;">
+        从实用的角度看，<a href="https://home-wd188.com">wd188</a> 更像是一个轻量级的起点：不堆砌功能，不追逐流行样式，只把该呈现的内容摆放清楚。你不需要学习任何操作，打开就是熟悉的布局，这对日常使用来说，反而是一种难得的省心。
+      </p>
+    </div>
+
+    <!-- 特点列表 (特点卡片) -->
+    <div class="card">
+      <h2 style="font-weight: 500; font-size: 1.35rem; color: #1e3444; margin-bottom: 0.75rem;">几个让人记住的特点</h2>
+      <div class="feature-grid">
+        <div class="feature-item">
+          <span class="icon">🔄</span>
+          <h3>一致的入口</h3>
+          <p>每次访问看到的都是同一套结构，没有突然的改版或隐藏跳转。这种稳定性对长期使用很重要。</p>
+        </div>
+        <div class="feature-item">
+          <span class="icon">📄</span>
+          <h3>干净的页面说明</h3>
+          <p>文字和功能一一对应，没有多余的弹窗或诱导提示。页面本身就在告诉你：“这就是全部”。</p>
+        </div>
+        <div class="feature-item">
+          <span class="icon">⚡</span>
+          <h3>轻量响应</h3>
+          <p>无论在手机还是电脑上打开，页面都会自适应，但不会因为响应式而丢失原有的排版节奏。</p>
+        </div>
+        <div class="feature-item">
+          <span class="icon">🔍</span>
+          <h3>不追踪，不打扰</h3>
+          <p>没有第三方追踪脚本，没有强制注册或弹窗。你只是在使用一个页面，而不是被页面使用。</p>
+        </div>
+      </div>
+      <!-- 插入一句自然的链接 -->
+      <p style="margin-top: 1.2rem; color: #3d5568; font-size: 0.98rem;">
+        如果你还没尝试过，不妨去 <a href="https://home-wd188.com">wd188</a> 看一眼，也许它正符合你对“一个简单入口”的期待。
+      </p>
+    </div>
+
+    <!-- 场景 + 提示 (温和的提醒) -->
+    <div class="card">
+      <div class="note-section">
+        <p><strong>适合这样的时刻：</strong> 你不想在多个标签页之间反复切换，只想找一个固定的地方开始；或者你帮家人设置浏览器首页，希望它不容易误触、不会突然改变。</p>
+        <p style="margin-top: 0.5rem;">这也是为什么很多人把 <a href="https://home-wd188.com">wd188</a> 放在书签栏或者设为启动页——它不会打扰你，但你需要的时候它就在。</p>
+      </div>
+
+      <!-- FAQ 摘要（简短） -->
+      <div class="faq-mini">
+        <details>
+          <summary>wd188 对浏览器有要求吗？</summary>
+          <p>几乎所有现代浏览器都能正常显示，包括 Chrome、Edge、Safari、Firefox 以及移动端浏览器。不需要安装任何插件。</p>
+        </details>
+        <details>
+          <summary>页面会收集个人信息吗？</summary>
+          <p>不会。页面本身不包含任何分析脚本或 cookie 追踪工具。你可以放心使用，无需担心隐私问题。</p>
+        </details>
+        <details>
+          <summary>如果页面无法打开怎么办？</summary>
+          <p>可以先检查网络连接，或者稍后重试。如果问题持续，可以尝试清除浏览器缓存或更换 DNS。由于 wd188 结构简单，绝大多数情况下都能稳定访问。</p>
+        </details>
+      </div>
+    </div>
+
+    <!-- 温和结尾 -->
+    <div class="gentle-footer">
+      <p>页面内容基于真实体验整理。希望对你有用。<br>
+      如果你愿意，可以记住这个地址：<a href="https://home-wd188.com">wd188</a> —— 一个不打扰、不复杂的入口。</p>
+    </div>
+
+  </div>
+</body>
+</html>
